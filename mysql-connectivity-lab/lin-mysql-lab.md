@@ -27,7 +27,7 @@ ssh <username>@<PUBLIC_IP_ADDRESS>
 sudo -i
 
 
-Step 2: Reproduce the Issue
+**Step 2: Reproduce the Issue**
 
 From the App server, try to connect to the DB server:
 
@@ -36,8 +36,8 @@ mysql -u db_user -h 10.0.1.105 -pdb_pass123
 
 You should see an error if connectivity is blocked.
 
-Step 3: Verify Network Connectivity
-
+**Step 3: Verify Network Connectivity
+**
 From the App server:
 
 ping 10.0.1.105
@@ -47,8 +47,8 @@ Press CTRL + C to stop ping.
 
 If ping works, the servers can reach each other at the network level.
 
-Step 4: Check MySQL Port Connectivity
-
+**Step 4: Check MySQL Port Connectivity
+**
 On DB server, stop MariaDB service temporarily:
 
 systemctl stop mariadb
@@ -72,8 +72,8 @@ Restart MariaDB:
 
 systemctl enable --now mariadb
 
-Step 5: Check Firewall
-
+**Step 5: Check Firewall
+**
 On DB server, list firewall rules:
 
 sudo firewall-cmd --list-all
@@ -84,8 +84,8 @@ If mysql or port 3306 is not allowed, add the rule:
 sudo firewall-cmd --permanent --zone=public --add-service=mysql
 sudo firewall-cmd --reload
 
-Step 6: Test Connection Again
-
+**Step 6: Test Connection Again
+**
 From App server:
 
 mysql -u db_user -h 10.0.1.105 -pdb_pass123
@@ -93,8 +93,8 @@ mysql -u db_user -h 10.0.1.105 -pdb_pass123
 
 If successful, you are connected to MariaDB.
 
-Step 7: Verify MariaDB
-
+**Step 7: Verify MariaDB
+**
 Inside MariaDB monitor:
 
 SHOW DATABASES;
@@ -107,14 +107,14 @@ From DB server, you can also check:
 mysql -u db_user -h 10.0.1.105 -pdb_pass123
 SHOW DATABASES;
 
-Conclusion
-
+**Conclusion
+**
 You have successfully diagnosed and fixed the network connectivity issue between App and DB servers.
 
 Firewall and MySQL service configuration were the main causes of the issue.
 
-Tools Used
-
+**Tools Used
+**
 ping → Check network connectivity
 
 nc (netcat) → Check port availability
